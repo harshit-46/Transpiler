@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const { spawn } = require('child_process');
 
 const app = express();
 const PORT = 5000;
@@ -11,14 +12,32 @@ app.use(bodyParser.json());
 app.post('/transpile', (req, res) => {
     const { code } = req.body;
 
-    console.log('Received Python code:\n', code);
+    const python = spawn('python', ['transpiler.py']); // or 'python3' if needed
 
-    // Replace this with actual transpiler logic
-    const fakeCpp = `// Transpiled C++\n#include <iostream>\n\nint main() {\n  std::cout << "Hello from transpiled code!" << std::endl;\n  return 0;\n}`;
+    let cppOutput = '';
+    let errorOutput = '';
 
-    res.json({ cpp: fakeCpp });
+    python.stdout.on('data', (data) => {
+        cppOutput += data.toString();
+    });
+
+    python.stderr.on('data', (data) => {
+        errorOutput += data.toString();
+    });
+
+    python.on('close', (code) => {
+        if (code === 0) {
+            res.json({ cpp: cppOutput });
+        } else {
+            res.status(500).json({ error: errorOutput || 'Transpiler error' });
+        }
+    });
+
+    // Send Python code to the transpiler
+    python.stdin.write(code);
+    python.stdin.end();
 });
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server listening on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
