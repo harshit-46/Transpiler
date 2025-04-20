@@ -1,4 +1,4 @@
-from parser import PythonParser
+from python_parser import PythonParser
 from visitor import TranspilerVisitor
 from input import code
 from generator import CppCodeGenerator
