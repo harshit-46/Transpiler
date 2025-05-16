@@ -70,10 +70,10 @@ def main():
         ast_text = ast.dump(ast_tree, indent=4)
         ast_output_path = os.path.join(base_dir, "ast.txt")
         write_to_file(ast_output_path, ast_text)
-        print(f"[✓] AST written to: {ast_output_path}")
+        print(f"[OK]: AST written to: {ast_output_path}")
 
     except Exception as e:
-        print(f"[✗] Error during AST generation: {e}")
+        print(f"[ERROR]: Error during AST generation: {e}")
         return
 
     try:
@@ -88,10 +88,10 @@ def main():
                 ir_file.write(f"Statement {i + 1}:\n")
                 ir_file.write(json.dumps(stmt, indent=4))
                 ir_file.write("\n\n" + "=" * 40 + "\n\n")
-        print(f"[✓] Intermediate Representation written to: {ir_output_path}")
+        print(f"[OK]: Intermediate Representation written to: {ir_output_path}")
 
     except Exception as e:
-        print(f"[✗] Error during IR generation: {e}")
+        print(f"[ERROR]: Error during IR generation: {e}")
         return
 
     try:
@@ -101,10 +101,10 @@ def main():
 
         cpp_output_path = os.path.join(base_dir, "output.cpp")
         write_to_file(cpp_output_path, output_code)
-        print(f"[✓] C++ code written to: {cpp_output_path}")
+        print(f"[OK]: C++ code written to: {cpp_output_path}")
 
     except Exception as e:
-        print(f"[✗] Error during C++ code generation: {e}")
+        print(f"[ERROR]: Error during C++ code generation: {e}")
 
 
 if __name__ == "__main__":
