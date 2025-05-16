@@ -126,7 +126,7 @@ function App() {
   const [cppCode, setCppCode] = useState("");
 
   const handleConvert = async () => {
-    const response = await fetch('/api/convert', {
+    const response = await fetch('http://localhost:5000/convert', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code: pythonCode }),

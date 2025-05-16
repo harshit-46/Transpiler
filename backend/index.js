@@ -10,6 +10,11 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.send('Backend API running. Use POST /convert.');
+});
+
+
 app.post("/convert", (req, res) => {
     const { code } = req.body;
 

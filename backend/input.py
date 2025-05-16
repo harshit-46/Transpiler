@@ -1,5 +1,3 @@
-code = """
-
 def is_palindrome(s):
     # Remove spaces and convert to lowercase
     s = s.replace(' ', '').lower()
@@ -9,5 +7,3 @@ def is_palindrome(s):
 # Example usage
 input_string = 'A man a plan a canal Panama'
 print(is_palindrome(input_string))
-
-"""
