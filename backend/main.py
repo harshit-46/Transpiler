@@ -47,7 +47,8 @@ import sys
 
 from parser_1 import PythonParser
 from visitor import TranspilerVisitor
-from input import code  # Or use dynamic input, see below
+with open("input.py", "r") as f:
+    code = f.read()
 from generator import CppCodeGenerator
 
 
