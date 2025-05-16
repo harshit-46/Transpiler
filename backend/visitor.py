@@ -3,20 +3,64 @@ import ast
 class TranspilerVisitor(ast.NodeVisitor):
     def __init__(self):
         self.transpiler_tree = []
+        self.declared_vars = set()
+        
+    def _infer_type(self, node):
+        if isinstance(node, ast.Constant):
+            if isinstance(node.value, int):
+                return "int"
+            elif isinstance(node.value, float):
+                return "double"
+            elif isinstance(node.value, str):
+                return "string"
+            elif isinstance(node.value, bool):
+                return "bool"
+        elif isinstance(node, ast.BinOp):
+            left_type = self._infer_type(node.left)
+            right_type = self._infer_type(node.right)
+            if "double" in (left_type, right_type):
+                return "double"
+            elif "int" in (left_type, right_type):
+                return "int"
+        elif isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Name) and node.func.id == "str":
+                return "string"
+            elif node.func.id in ["to_string"]:
+                return "string"
+        elif isinstance(node, ast.Compare) or isinstance(node, ast.BoolOp):
+            return "bool"
+        elif isinstance(node, ast.IfExp):
+            then_type = self._infer_type(node.body)
+            else_type = self._infer_type(node.orelse)
+            return then_type if then_type == else_type else "auto"
+
+        return "auto"
 
     def visit_Assign(self, node):
         value = self._get_value(node.value)
+        dtype = self._infer_type(node.value)
+
         for target in node.targets:
             if isinstance(target, ast.Name):
                 target_name = target.id
             else:
                 target_name = self._get_value(target)
-        
+
+            is_new = target_name not in self.declared_vars
+            if is_new:
+                self.declared_vars.add(target_name)
+                if dtype == "auto":
+                    dtype = "int"
+            else:
+                dtype = "" 
+
             self.transpiler_tree.append({
                 "type": "assign",
                 "target": target_name,
-                "value": value
+                "value": value,
+                "datatype": dtype
             })
+
 
     def _get_op(self, op):
         return {
@@ -53,9 +97,10 @@ class TranspilerVisitor(ast.NodeVisitor):
         return {
             ast.UAdd: '+',
             ast.USub: '-',
-            ast.Not: 'not',
+            ast.Not: '!',
             ast.Invert: '~'
         }.get(type(op), '?')
+
     
     def visit_ClassDef(self, node):
         class_data = {
@@ -208,11 +253,11 @@ class TranspilerVisitor(ast.NodeVisitor):
 
     def get_bool_op(self, op):
         if isinstance(op, ast.And):
-            return "and"
+            return "&&"
         elif isinstance(op, ast.Or):
-            return "or"
-        else:
-            return "unknown"
+            return "||"
+        return "unknown"
+
 
     def visit_UnaryOp(self, node):
         if isinstance(node.op, ast.Not):
@@ -259,9 +304,9 @@ class TranspilerVisitor(ast.NodeVisitor):
             return f"({op} {operand})"
 
         elif isinstance(val, ast.BoolOp):
-            op = self._get_op(val.op)
+            op = self.get_bool_op(val.op)
             values = [self._get_value(v) for v in val.values]
-            return f" {op} ".join(f"({v})" for v in values)
+            return f"({' {} '.format(op).join(values)})"
 
         elif isinstance(val, ast.Attribute):
             value = self._get_value(val.value)
@@ -283,6 +328,21 @@ class TranspilerVisitor(ast.NodeVisitor):
             elements = [self._get_value(e) for e in val.elts]
             return f"({', '.join(map(str, elements))})"
         
+        elif isinstance(val, ast.IfExp):
+            test = self._get_value(val.test)
+            body = self._get_value(val.body)
+            orelse = self._get_value(val.orelse)
+            return f"({test} ? to_string({body}) : \"undefined\")"
+
+        elif isinstance(val, ast.JoinedStr):
+            parts = []
+            for part in val.values:
+                if isinstance(part, ast.FormattedValue):
+                    parts.append(self._get_value(part.value))
+                elif isinstance(part, ast.Constant):
+                    parts.append(f'"{part.value}"')
+            return " << ".join(parts)
+
         elif isinstance(val, ast.Dict):
             keys = [self._get_value(k) for k in val.keys]
             values = [self._get_value(v) for v in val.values]

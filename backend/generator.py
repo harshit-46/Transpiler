@@ -1,3 +1,4 @@
+import re
 class CppCodeGenerator:
     def __init__(self, ir_tree):
         self.ir_tree = ir_tree
@@ -6,6 +7,8 @@ class CppCodeGenerator:
 
     def generate(self):
         self.lines.append('#include <iostream>')
+        self.lines.append('#include <string>')
+        self.lines.append('#include <cmath>')
         self.lines.append('using namespace std;\n')
         for node in self.ir_tree:
             self.handle_node(node)
@@ -23,16 +26,21 @@ class CppCodeGenerator:
         else:
             self.emit(f"// Unhandled node type: {node_type}")
 
-
     def gen_assign(self, node):
-        self.emit(f"auto {node['target']} = {node['value']};")
+        value = self.transform_expression(node['value'])  # Apply transformation
+        dtype = node.get('datatype', 'int')
+
+        if dtype:
+            self.emit(f"{dtype} {node['target']} = {value};")
+        else:
+            self.emit(f"{node['target']} = {value};")
 
     def gen_print(self, node):
         args = " << ".join(map(str, node['args']))
         self.emit(f"cout << {args} << endl;")
 
     def gen_function_def(self, node):
-        args = ", ".join(f"auto {arg}" for arg in node["args"])
+        args = ", ".join(f"int {arg}" for arg in node["args"]) 
         self.emit(f"void {node['name']}({args}) {{")
         self.indent_level += 1
         for stmt in node["body"]:
@@ -109,3 +117,11 @@ class CppCodeGenerator:
 
     def gen_aug_assign(self, node):
         self.emit(f"{node['target']} {node['op']}= {node['value']};")
+     
+    def transform_expression(self, expr):
+        expr = str(expr)
+        expr = re.sub(r'\(([^()]+?)\s*\*\*\s*([^()]+?)\)', r'pow(\1, \2)', expr)
+        expr = re.sub(r'([^()\s]+)\s*\*\*\s*([^()\s]+)', r'pow(\1, \2)', expr)
+        expr = expr.replace('//', '/')
+        return expr
+

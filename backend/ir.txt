@@ -1,0 +1,356 @@
+{
+    "type": "import",
+    "module": "math",
+    "as": null
+}
+
+{
+    "type": "import_from",
+    "module": "os",
+    "name": "path",
+    "as": null
+}
+
+{
+    "type": "assign",
+    "target": "PI",
+    "value": 3.1415,
+    "datatype": "double"
+}
+
+{
+    "type": "assign",
+    "target": "E",
+    "value": "math.e",
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "x",
+    "value": 5,
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "y",
+    "value": "(- x)",
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "z",
+    "value": "((x + (y * 2)) - ((x // 2) % (3 ** 2)))",
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "w",
+    "value": "((x & 3) | (2 ^ 1))",
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "flag",
+    "value": "((! (x > 0)) && (~ x))",
+    "datatype": "bool"
+}
+
+{
+    "type": "assign",
+    "target": "a",
+    "value": 10,
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "b",
+    "value": 20,
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "is_equal",
+    "value": "(a == b)",
+    "datatype": "bool"
+}
+
+{
+    "type": "assign",
+    "target": "is_not_equal",
+    "value": "(a != b)",
+    "datatype": "bool"
+}
+
+{
+    "type": "assign",
+    "target": "is_greater",
+    "value": "(a > b)",
+    "datatype": "bool"
+}
+
+{
+    "type": "assign",
+    "target": "is_smaller_or_equal",
+    "value": "(a <= b)",
+    "datatype": "bool"
+}
+
+{
+    "type": "assign",
+    "target": "status",
+    "value": "(is_equal ? to_string(OK) : \"undefined\")",
+    "datatype": "string"
+}
+
+{
+    "type": "function_def",
+    "name": "power",
+    "args": [
+        "base",
+        "exponent"
+    ],
+    "body": [
+        {
+            "type": "return",
+            "value": "(base ** exponent)"
+        }
+    ]
+}
+
+{
+    "type": "function_def",
+    "name": "outer",
+    "args": [
+        "val"
+    ],
+    "body": [
+        {
+            "type": "function_def",
+            "name": "inner",
+            "args": [
+                "x"
+            ],
+            "body": [
+                {
+                    "type": "return",
+                    "value": "(x * x)"
+                }
+            ]
+        },
+        {
+            "type": "return",
+            "value": "inner(val)"
+        }
+    ]
+}
+
+{
+    "type": "if",
+    "condition": "(a > b)",
+    "body": [
+        {
+            "type": "assign",
+            "target": "result",
+            "value": "a is greater",
+            "datatype": "string"
+        }
+    ],
+    "elif": [
+        {
+            "condition": "(a == b)",
+            "body": [
+                {
+                    "type": "assign",
+                    "target": "result",
+                    "value": "a equals b",
+                    "datatype": ""
+                }
+            ]
+        }
+    ],
+    "else": [
+        {
+            "type": "assign",
+            "target": "result",
+            "value": "a is smaller",
+            "datatype": ""
+        }
+    ]
+}
+
+{
+    "type": "assign",
+    "target": "count",
+    "value": 0,
+    "datatype": "int"
+}
+
+{
+    "type": "while",
+    "condition": "(count < 3)",
+    "body": [
+        {
+            "type": "print",
+            "args": [
+                "\"count: \" << count"
+            ]
+        },
+        {
+            "type": "aug_assign",
+            "target": "count",
+            "op": "+",
+            "value": 1
+        },
+        {
+            "type": "if",
+            "condition": "(count == 2)",
+            "body": [
+                {
+                    "type": "continue"
+                }
+            ],
+            "elif": [
+                {
+                    "condition": "(count > 2)",
+                    "body": [
+                        {
+                            "type": "break"
+                        }
+                    ]
+                }
+            ],
+            "else": []
+        }
+    ]
+}
+
+{
+    "type": "for",
+    "target": "i",
+    "iter": "range(3)",
+    "body": [
+        {
+            "type": "print",
+            "args": [
+                "\"For loop iteration \" << i"
+            ]
+        }
+    ]
+}
+
+{
+    "type": "assign",
+    "target": "nums",
+    "value": "[1, 2, 3, 4]",
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "names",
+    "value": "(Alice, Bob, Charlie)",
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "mapping",
+    "value": "{x: 1, y: 2}",
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "second",
+    "value": "nums[1]",
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "sliced",
+    "value": "nums[unknown]",
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "s",
+    "value": "str(a)",
+    "datatype": "string"
+}
+
+{
+    "type": "assign",
+    "target": "i",
+    "value": "int(42)",
+    "datatype": "int"
+}
+
+{
+    "type": "assign",
+    "target": "b",
+    "value": "bool(1)",
+    "datatype": ""
+}
+
+{
+    "type": "function_def",
+    "name": "empty",
+    "args": [],
+    "body": [
+        {
+            "type": "pass"
+        }
+    ]
+}
+
+{
+    "type": "print",
+    "args": [
+        "\"x: \" << x << \", y: \" << y << \", z: \" << z << \", w: \" << w << \", flag: \" << flag"
+    ]
+}
+
+{
+    "type": "print",
+    "args": [
+        "\"Comparisons: == \" << is_equal << \", != \" << is_not_equal"
+    ]
+}
+
+{
+    "type": "print",
+    "args": [
+        "\"Result: \" << result << \", Status: \" << status"
+    ]
+}
+
+{
+    "type": "print",
+    "args": [
+        "\"Power: \" << power(2, 3) << \", Outer: \" << outer(4)"
+    ]
+}
+
+{
+    "type": "print",
+    "args": [
+        "\"Names: \" << names << \", Mapping: \" << mapping"
+    ]
+}
+
+{
+    "type": "print",
+    "args": [
+        "\"Second: \" << second << \", Slice: \" << sliced"
+    ]
+}
+

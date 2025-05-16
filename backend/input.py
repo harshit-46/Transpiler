@@ -1,58 +1,86 @@
 code = """
+# Imports
 import math
-from sys import version as py_version
+from os import path
 
+# Constants
+PI = 3.1415
+E = math.e  # Euler's number
+
+# Unary and Binary Ops
 x = 5
-y = 10
-z = x + y * 2
+y = -x
+z = x + y * 2 - (x // 2) % 3 ** 2
+w = x & 3 | 2 ^ 1
+flag = not (x > 0) and ~x
 
-def greet(name):
-    print("Hello", name)
-    if name == "Alice":
-        print("Welcome back!")
-    elif name == "Bob":
-        print("Hi Bob!")
-    else:
-        print("Stranger danger!")
+# Comparisons
+a = 10
+b = 20
+is_equal = a == b
+is_not_equal = a != b
+is_greater = a > b
+is_smaller_or_equal = a <= b
 
-class Person:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
+# Inline conditional
+status = "OK" if is_equal else "FAIL"
 
-    def speak(self):
-        print(self.name, "says hi.")
+# Function with arguments and return
+def power(base, exponent):
+    # Calculates power
+    return base ** exponent
 
-    def is_adult(self):
-        if self.age >= 18:
-            return True
-        else:
-            return False
+# Nested function
+def outer(val):
+    def inner(x):
+        return x * x
+    return inner(val)
 
-items = [1, 2, 3, 4]
-coords = (10, 20)
-data = {"a": 1, "b": 2}
+# If-elif-else
+if a > b:
+    result = "a is greater"
+elif a == b:
+    result = "a equals b"
+else:
+    result = "a is smaller"
 
-for item in items:
-    if item % 2 == 0:
+# While loop
+count = 0
+while count < 3:
+    print(f"count: {count}")
+    count += 1
+    if count == 2:
         continue
-    else:
-        print(item)
-
-i = 0
-while i < 5:
-    if i == 3:
+    elif count > 2:
         break
-    i += 1
 
-val = not x
-bitwise = ~y
-shift = x << 2
-logical = (x < y and y != 0) or (x > 1)
-greet("Bob")
+# For loop with range
+for i in range(3):
+    print(f"For loop iteration {i}")
 
-person = Person("Alice", 30)
-person.speak()
+# List, tuple, dict
+nums = [1, 2, 3, 4]
+names = ("Alice", "Bob", "Charlie")
+mapping = {"x": 1, "y": 2}
 
-pass
+# Access and slice
+second = nums[1]
+sliced = nums[1:3]
+
+# Casting
+s = str(a)
+i = int("42")
+b = bool(1)
+
+# Pass statement
+def empty(): pass
+
+# Print section
+print(f"x: {x}, y: {y}, z: {z}, w: {w}, flag: {flag}")
+print(f"Comparisons: == {is_equal}, != {is_not_equal}")
+print(f"Result: {result}, Status: {status}")
+print(f"Power: {power(2, 3)}, Outer: {outer(4)}")
+print(f"Names: {names}, Mapping: {mapping}")
+print(f"Second: {second}, Slice: {sliced}")
+
 """
