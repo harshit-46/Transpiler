@@ -1,5 +1,3 @@
-"""
-
 import ast
 
 class TranspilerVisitor(ast.NodeVisitor):
@@ -352,11 +350,11 @@ class TranspilerVisitor(ast.NodeVisitor):
 
         return "unknown"
 
-        
+
+
+
 """
-
-
-
+# This is chatgpt code
 
 import ast
 
@@ -614,3 +612,4 @@ class TranspilerVisitor(ast.NodeVisitor):
                 return f"{lower}:{upper}"
         else:
             return "unknown"
+"""

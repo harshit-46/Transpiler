@@ -18,15 +18,6 @@ export default function PythonInput({ pythonCode, setPythonCode, handleFileUploa
                     />
                 </label>
             </div>
-            <div>
-                <label className="block font-semibold mb-1 text-sm">
-                    Additional Instructions
-                </label>
-                <textarea
-                    className="w-full bg-black/80 text-gray-300 p-3 rounded-lg h-20 resize-none outline-none"
-                    placeholder="Provide any specific requirements to tailor the code conversion."
-                />
-            </div>
         </div>
     );
 }

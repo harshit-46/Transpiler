@@ -1,23 +1,29 @@
-import React from 'react';
+import { FaCode } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+export default function Navbar() {
     return (
-        <nav className="bg-white/20 backdrop-blur-md shadow-md px-8 py-4">
-            <div className="max-w-7xl mx-auto flex justify-between items-center">
-                <div className="text-2xl font-semibold text-gray-900">Py2Cpp</div>
-                <ul className="flex gap-6 text-gray-800 font-medium text-sm">
-                    <li className="hover:text-blue-600 transition cursor-pointer">Home</li>
-                    <li className="hover:text-blue-600 transition cursor-pointer">Overview</li>
-                    <li className="hover:text-blue-600 transition cursor-pointer">Contact Us</li>
-                    <li>
-                        <button className="px-4 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
-                            Login
-                        </button>
-                    </li>
-                </ul>
+        <nav className="bg-[#EEEEFF] shadow">
+            <div className="container mx-auto px-4">
+                <div className="flex justify-between h-16">
+                    <div className="flex items-center">
+                        <Link to="/" className="flex items-center">
+                            <FaCode className="h-8 w-8 mr-2 text-blue-600" />
+                            <span className="text-xl font-bold text-gray-900">
+                                Python to C++ Converter
+                            </span>
+                        </Link>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                        <Link to="/" className="text-gray-700 hover:text-blue-600">
+                            Home
+                        </Link>
+                        <Link to="/about" className="text-gray-700 hover:text-blue-600">
+                            About
+                        </Link>
+                    </div>
+                </div>
             </div>
         </nav>
     );
-};
-
-export default Navbar;
+}
