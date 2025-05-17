@@ -1,21 +1,29 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import Header from "./Header";
 import PythonInput from "./PythonInput";
 import CppOutput from "./CppOutput";
 import ActionButtons from "./ActionButtons";
 
-const HomePage = () => {
-
+export default function HomePage() {
     const [pythonCode, setPythonCode] = useState("");
     const [cppCode, setCppCode] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleConvert = async () => {
-        const response = await fetch('http://localhost:5000/convert', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ code: pythonCode }),
-        });
-        const data = await response.json();
-        setCppCode(data.cppCode);
+        setLoading(true);
+        try {
+            const response = await fetch('http://localhost:5000/convert', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ code: pythonCode }),
+            });
+            const data = await response.json();
+            setCppCode(data.cppCode);
+        } catch (error) {
+            alert("Conversion failed. Try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleReset = () => {
@@ -47,27 +55,34 @@ const HomePage = () => {
         reader.readAsText(file);
     };
 
-
     return (
         <>
+            <Header className="mt-12"/>
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 bg-glass p-6 rounded-xl shadow-glass border border-green-500 backdrop-blur-md">
                 <PythonInput
                     pythonCode={pythonCode}
                     setPythonCode={setPythonCode}
                     handleFileUpload={handleFileUpload}
                 />
-                <CppOutput
-                    cppCode={cppCode}
-                    handleCopy={handleCopy}
-                    handleDownload={handleDownload}
-                />
-                <ActionButtons
-                    handleReset={handleReset}
-                    handleConvert={handleConvert}
-                />
-            </div >
-        </>
-    )
-};
+                <div className="relative">
+                    <CppOutput
+                        cppCode={cppCode}
+                        handleCopy={handleCopy}
+                        handleDownload={handleDownload}
+                    />
 
-export default HomePage;
+                    {loading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-glass bg-opacity-60 backdrop-blur-sm z-10 rounded-lg">
+                            <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                        </div>
+                    )}
+                </div>
+
+            </div>
+            <ActionButtons
+                handleReset={handleReset}
+                handleConvert={handleConvert}
+            />
+        </>
+    );
+}

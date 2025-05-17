@@ -1,0 +1,30 @@
+Statement 1:
+{
+    "type": "function_def",
+    "name": "is_odd_or_even",
+    "args": [
+        "number"
+    ],
+    "body": [
+        {
+            "type": "if",
+            "condition": "((number % 2) == 0)",
+            "body": [
+                {
+                    "type": "return",
+                    "value": "Even"
+                }
+            ],
+            "elif": [],
+            "else": [
+                {
+                    "type": "return",
+                    "value": "Odd"
+                }
+            ]
+        }
+    ]
+}
+
+========================================
+
