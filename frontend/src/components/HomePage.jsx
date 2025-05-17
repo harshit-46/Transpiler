@@ -10,6 +10,10 @@ export default function HomePage() {
     const [loading, setLoading] = useState(false);
 
     const handleConvert = async () => {
+        if (pythonCode.trim() === "") {
+            alert("Please enter Python code before converting.");
+            return;
+        }
         setLoading(true);
         try {
             const response = await fetch('http://localhost:5000/convert', {
@@ -58,7 +62,7 @@ export default function HomePage() {
     return (
         <>
             <Header className="mt-12"/>
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 bg-glass p-6 rounded-xl shadow-glass border border-green-500 backdrop-blur-md">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 bg-glass p-6 rounded-xl shadow-glass border border-black-500 backdrop-blur-md">
                 <PythonInput
                     pythonCode={pythonCode}
                     setPythonCode={setPythonCode}

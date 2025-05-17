@@ -5,7 +5,7 @@ export default function PythonInput({ pythonCode, setPythonCode, handleFileUploa
                 value={pythonCode}
                 onChange={(e) => setPythonCode(e.target.value)}
                 placeholder="Your Python code here"
-                className="bg-black/80 text-green-100 rounded-lg p-4 h-64 resize-none outline-none"
+                className="bg-[#EEEEFF] border border-black text-black rounded-lg p-4 h-64 resize-none outline-none"
             />
             <div className="text-right">
                 <label className="text-green-400 hover:underline text-sm cursor-pointer">
