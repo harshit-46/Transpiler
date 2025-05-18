@@ -1,11 +1,12 @@
-export default function PythonInput({ pythonCode, setPythonCode, handleFileUpload }) {
+export default function PythonInput({ pythonCode, setPythonCode, handleFileUpload, darkMode }) {
     return (
         <div className="flex flex-col gap-4">
             <textarea
                 value={pythonCode}
                 onChange={(e) => setPythonCode(e.target.value)}
                 placeholder="Your Python code here"
-                className="bg-[#EEEEFF] border border-black text-black rounded-lg p-4 h-64 resize-none outline-none"
+                className={`rounded-lg p-4 h-64 resize-none outline-none
+                ${darkMode ? "bg-gray-900 text-white placeholder-white border border-white" : "bg-[#EEEEFF] text-black placeholder-gray-500 border border-black"}`}
             />
             <div className="text-right">
                 <label className="text-green-400 hover:underline text-sm cursor-pointer">

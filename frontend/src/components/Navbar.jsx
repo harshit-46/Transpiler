@@ -13,10 +13,10 @@ export default function Navbar({ darkMode, setDarkMode }) {
                 </Link>
 
                 <div className="flex items-center space-x-4">
-                    <Link to="/" className={`hover:text-blue-500 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+                    <Link to="/" className={`hover:text-blue-500 ${darkMode ? "text-white" : "text-gray-700"}`}>
                         Home
                     </Link>
-                    <Link to="/about" className={`hover:text-blue-500 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+                    <Link to="/about" className={`hover:text-blue-500 ${darkMode ? "text-white" : "text-gray-700"}`}>
                         About
                     </Link>
                     <button

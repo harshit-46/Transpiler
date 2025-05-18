@@ -62,17 +62,19 @@ export default function HomePage({ darkMode }) {
     return (
         <>
             <Header className="mt-12" />
-            <div className={`max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-xl shadow-glass backdrop-blur-md ${darkMode ? "bg-gray-800" : "bg-glass"}`}>
+            <div className={`max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-xl mt-12 shadow-glass backdrop-blur-md ${darkMode ? "bg-gray-800" : "bg-[#EEEEFE]"}`}>
                 <PythonInput
                     pythonCode={pythonCode}
                     setPythonCode={setPythonCode}
                     handleFileUpload={handleFileUpload}
+                    darkMode={darkMode}
                 />
                 <div className="relative">
                     <CppOutput
                         cppCode={cppCode}
                         handleCopy={handleCopy}
                         handleDownload={handleDownload}
+                        darkMode={darkMode}
                     />
 
                     {loading && (
