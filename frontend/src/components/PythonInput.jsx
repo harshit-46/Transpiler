@@ -1,16 +1,22 @@
+import { useEffect, useState, useRef } from "react";
+import { MdUploadFile } from "react-icons/md";
+
 export default function PythonInput({ pythonCode, setPythonCode, handleFileUpload, darkMode }) {
+    const [lineNumbers, setLineNumbers] = useState("1");
+    const textareaRef = useRef(null);
+
+    useEffect(() => {
+        const lines = pythonCode.split("\n").length;
+        const nums = Array.from({ length: lines }, (_, i) => i + 1).join("\n");
+        setLineNumbers(nums);
+    }, [pythonCode]);
+
     return (
         <div className="flex flex-col gap-4">
-            <textarea
-                value={pythonCode}
-                onChange={(e) => setPythonCode(e.target.value)}
-                placeholder="Your Python code here"
-                className={`rounded-lg p-4 h-64 resize-none outline-none
-                ${darkMode ? "bg-gray-900 text-white placeholder-white border border-white" : "bg-[#EEEEFF] text-black placeholder-gray-500 border border-black"}`}
-            />
-            <div className="text-right">
-                <label className="text-green-400 hover:underline text-sm cursor-pointer">
-                    Upload
+            <div className="w-full h-32 border-2 border-dotted rounded">
+                <label className="text-black">
+                    <MdUploadFile /> <span>Click to select or drop your input code file here.
+                        You can also type the input code below.</span>
                     <input
                         type="file"
                         accept=".py"
@@ -19,37 +25,27 @@ export default function PythonInput({ pythonCode, setPythonCode, handleFileUploa
                     />
                 </label>
             </div>
+            <div className={`relative flex w-full rounded-lg overflow-hidden ${darkMode ? "border-2 border-white" : "border-2 border-black"}`}>
+                {/* Line numbers */}
+                <pre className={`text-right px-2 select-none text-sm font-mono ${darkMode ? "bg-gray-800 text-gray-400 border-r border-white" : "bg-gray-200 text-gray-600 border-r border-black"
+                    }`}>
+                    {lineNumbers}
+                </pre>
+
+                {/* Textarea */}
+                <textarea
+                    ref={textareaRef}
+                    value={pythonCode}
+                    onChange={(e) => setPythonCode(e.target.value)}
+                    placeholder="Your Python code here"
+                    spellCheck={false}
+                    autoCorrect="off"
+                    autoComplete="off"
+                    className={`w-full h-80 px-2 text-sm font-mono resize-none outline-none rounded
+                        ${darkMode ? "bg-gray-900 text-white placeholder-white" : "bg-[#EEEEFF] text-black placeholder-gray-500"}`}
+                    style={{ lineHeight: "1.25", whiteSpace: "pre" }}
+                />
+            </div>
         </div>
     );
 }
-
-
-
-/*
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
-
-export default function PythonInput({ pythonCode, setPythonCode, handleFileUpload }) {
-    return (
-        <div className="flex flex-col space-y-2">
-            <label className="font-semibold text-gray-800">Python Code:</label>
-            <textarea
-                value={pythonCode}
-                onChange={(e) => setPythonCode(e.target.value)}
-                rows={10}
-                className="w-full p-2 font-mono border rounded resize-none shadow"
-                placeholder="Write your Python code here..."
-            />
-            {pythonCode && (
-                <div className="mt-2 border rounded">
-                    <SyntaxHighlighter language="python" style={dracula} customStyle={{ borderRadius: '0.5rem', padding: '1rem' }}>
-                        {pythonCode}
-                    </SyntaxHighlighter>
-                </div>
-            )}
-            <input type="file" onChange={handleFileUpload} className="mt-2" />
-        </div>
-    );
-}
-
-*/

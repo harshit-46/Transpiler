@@ -3,6 +3,7 @@ import Header from "./Header";
 import PythonInput from "./PythonInput";
 import CppOutput from "./CppOutput";
 import ActionButtons from "./ActionButtons";
+import UploadSection from "./UploadSection";
 
 export default function HomePage({ darkMode }) {
     const [pythonCode, setPythonCode] = useState("");
@@ -78,7 +79,7 @@ export default function HomePage({ darkMode }) {
                     />
 
                     {loading && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-glass bg-opacity-60 backdrop-blur-sm z-10 rounded-lg">
+                        <div className="absolute inset-0 flex items-center justify-center bg-opacity-90 backdrop-blur-sm z-10 rounded-lg">
                             <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
                         </div>
                     )}
