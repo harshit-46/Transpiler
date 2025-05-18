@@ -8,6 +8,8 @@ export default function HomePage({ darkMode }) {
     const [pythonCode, setPythonCode] = useState("");
     const [cppCode, setCppCode] = useState("");
     const [loading, setLoading] = useState(false);
+    const [ir, setIR] = useState("Convert any python code to see the intermediate Representation(IR) of that code.");
+    const [ast, setAST] = useState("Convert any python code to see the Abstract Syntax Tree(AST) of that code.");
 
     const handleConvert = async () => {
         if (pythonCode.trim() === "") {
@@ -33,6 +35,8 @@ export default function HomePage({ darkMode }) {
     const handleReset = () => {
         setPythonCode("");
         setCppCode("");
+        setIR("Convert any python code to see the intermediate Representation(IR) of that code.");
+        setAST("Convert any python code to see the Abstract Syntax Tree(AST) of that code.")
     };
 
     const handleCopy = async () => {
