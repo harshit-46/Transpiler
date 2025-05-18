@@ -1,29 +1,36 @@
 import { FaCode } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ darkMode, setDarkMode }) {
     return (
-        <nav className="bg-[#EEEEFF] shadow">
-            <div className="container mx-auto px-4">
-                <div className="flex justify-between h-16">
-                    <div className="flex items-center">
-                        <Link to="/" className="flex items-center">
-                            <FaCode className="h-8 w-8 mr-2 text-blue-600" />
-                            <span className="text-xl font-bold text-gray-900">
-                                Python to C++ Converter
-                            </span>
-                        </Link>
-                    </div>
-                    <div className="flex items-center space-x-4">
-                        <Link to="/" className="text-gray-700 hover:text-blue-600">
-                            Home
-                        </Link>
-                        <Link to="/about" className="text-gray-700 hover:text-blue-600">
-                            About
-                        </Link>
-                    </div>
+        <nav className={`${darkMode ? "bg-gray-900" : "bg-[#EEEEFF]"}`}>
+            <div className="container mx-auto px-4 py-2 flex justify-between items-center">
+                <Link to="/" className="flex items-center">
+                    <FaCode className={`h-8 w-8 mr-2 ${darkMode ? "text-white" : "text-blue-600"}`} />
+                    <span className={`text-xl font-bold ${darkMode ? "text-white" : "text-gray-900"}`}>
+                        Py2Cpp
+                    </span>
+                </Link>
+
+                <div className="flex items-center space-x-4">
+                    <Link to="/" className={`hover:text-blue-500 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+                        Home
+                    </Link>
+                    <Link to="/about" className={`hover:text-blue-500 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+                        About
+                    </Link>
+                    <button
+                        onClick={() => setDarkMode(!darkMode)}
+                        className="p-2 cursor-pointer"
+                        title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                    >
+                        <span className="material-symbols-outlined">
+                            {darkMode ? "light_mode" : "dark_mode"}
+                        </span>
+                    </button>
+
                 </div>
             </div>
-        </nav>
+        </nav >
     );
 }

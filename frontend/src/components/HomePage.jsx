@@ -4,7 +4,7 @@ import PythonInput from "./PythonInput";
 import CppOutput from "./CppOutput";
 import ActionButtons from "./ActionButtons";
 
-export default function HomePage() {
+export default function HomePage({ darkMode }) {
     const [pythonCode, setPythonCode] = useState("");
     const [cppCode, setCppCode] = useState("");
     const [loading, setLoading] = useState(false);
@@ -61,8 +61,8 @@ export default function HomePage() {
 
     return (
         <>
-            <Header className="mt-12"/>
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 bg-glass p-6 rounded-xl shadow-glass border border-black-500 backdrop-blur-md">
+            <Header className="mt-12" />
+            <div className={`max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-xl shadow-glass backdrop-blur-md ${darkMode ? "bg-gray-800" : "bg-glass"}`}>
                 <PythonInput
                     pythonCode={pythonCode}
                     setPythonCode={setPythonCode}
