@@ -1,0 +1,30 @@
+Module(
+    body=[
+        FunctionDef(
+            name='is_odd_or_even',
+            args=arguments(
+                posonlyargs=[],
+                args=[
+                    arg(arg='number')],
+                kwonlyargs=[],
+                kw_defaults=[],
+                defaults=[]),
+            body=[
+                If(
+                    test=Compare(
+                        left=BinOp(
+                            left=Name(id='number', ctx=Load()),
+                            op=Mod(),
+                            right=Constant(value=2)),
+                        ops=[
+                            Eq()],
+                        comparators=[
+                            Constant(value=0)]),
+                    body=[
+                        Return(
+                            value=Constant(value='Even'))],
+                    orelse=[
+                        Return(
+                            value=Constant(value='Odd'))])],
+            decorator_list=[])],
+    type_ignores=[])
