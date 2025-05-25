@@ -4,6 +4,20 @@ import { MdUploadFile } from "react-icons/md";
 export default function PythonInput({ pythonCode, setPythonCode, handleFileUpload, darkMode }) {
     const [lineNumbers, setLineNumbers] = useState("1");
     const textareaRef = useRef(null);
+    const lineRef = useRef(null);
+
+    useEffect(() => {
+        const textarea = textareaRef.current;
+        const lineNumbers = lineRef.current;
+        if (!textarea || !lineNumbers) return;
+
+        const handleScroll = () => {
+            lineNumbers.scrollTop = textarea.scrollTop;
+        };
+
+        textarea.addEventListener("scroll", handleScroll);
+        return () => textarea.removeEventListener("scroll", handleScroll);
+    }, []);
 
     useEffect(() => {
         const lines = pythonCode.split("\n").length;
@@ -27,10 +41,18 @@ export default function PythonInput({ pythonCode, setPythonCode, handleFileUploa
                     className="hidden"
                 />
             </label>
-            <div className={`relative flex w-full rounded-lg overflow-hidden ${darkMode ? "border-2 border-white" : "border-2 border-black"}`}>
-                <pre className={`text-right px-2 py-2 select-none text-sm font-mono ${darkMode ? "bg-gray-800 text-gray-400 border-r border-white" : "bg-gray-200 text-gray-600 border-r border-black"}`}>
-                    {lineNumbers}
-                </pre>
+
+            <div className={`relative flex w-full rounded-lg ${darkMode ? "border-2 border-white" : "border-2 border-black"}`} style={{ height: "20rem", overflow: "hidden" }}>
+
+                <div
+                    ref={lineRef}
+                    className={`text-right px-2 py-2 select-none text-sm font-mono overflow-hidden
+                        ${darkMode ? "bg-gray-800 text-gray-400 border-r border-white" : "bg-gray-200 text-gray-600 border-r border-black"}`}
+                    style={{ width: "2.5rem" }}
+                >
+                    <pre style={{ margin: 0, lineHeight: "1.25" }}>{lineNumbers}</pre>
+                </div>
+
                 <textarea
                     ref={textareaRef}
                     value={pythonCode}
@@ -39,9 +61,9 @@ export default function PythonInput({ pythonCode, setPythonCode, handleFileUploa
                     spellCheck={false}
                     autoCorrect="off"
                     autoComplete="off"
-                    className={`w-full h-80 px-2 py-2 text-sm font-mono resize-none outline-none
+                    className={`w-full px-2 py-2 text-sm font-mono resize-none outline-none
                         ${darkMode ? "bg-gray-900 text-white placeholder-white" : "bg-[#EEEEFF] text-black placeholder-gray-500"}`}
-                    style={{ lineHeight: "1.25", whiteSpace: "pre" }}
+                    style={{ lineHeight: "1.25", whiteSpace: "pre", height: "100%", overflowY: "auto" }}
                 />
             </div>
         </div>
