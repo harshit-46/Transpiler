@@ -4,6 +4,7 @@ import PythonInput from "./PythonInput";
 import CppOutput from "./CppOutput";
 import ActionButtons from "./ActionButtons";
 import TabbedIRAST from "./TabbedIRAST";
+import TableSection from "./TableSection";
 
 export default function HomePage({ darkMode }) {
     const [pythonCode, setPythonCode] = useState("");
@@ -100,6 +101,7 @@ export default function HomePage({ darkMode }) {
             <div className="pb-8">
                 <TabbedIRAST ir={ir} ast={ast} darkMode={darkMode} />
             </div>
+            <TableSection/>
         </>
     );
 }

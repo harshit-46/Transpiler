@@ -27,7 +27,7 @@ export default function PythonInput({ pythonCode, setPythonCode, handleFileUploa
 
     return (
         <div className="flex flex-col gap-4">
-            <label className={`flex items-center justify-center h-24 rounded-md cursor-pointer transition text-center px-4 ${darkMode ? "border-2 border-dashed border-white" : "border-2 border-dashed border-black"}`}>
+            <label className={`flex items-center justify-center h-24 rounded-md cursor-pointer transition text-center px-4 ${darkMode ? "border-2 border-dashed border-white" : "border-2 border-dashed border-black bg-white"}`}>
                 <div className={`flex flex-row items-center ${darkMode ? "text-white" : "text-black"}`}>
                     <MdUploadFile className="text-4xl mr-2" />
                     <p>
@@ -62,7 +62,7 @@ export default function PythonInput({ pythonCode, setPythonCode, handleFileUploa
                     autoCorrect="off"
                     autoComplete="off"
                     className={`w-full px-2 py-2 text-sm font-mono resize-none outline-none
-                        ${darkMode ? "bg-gray-900 text-white placeholder-white" : "bg-[#EEEEFF] text-black placeholder-gray-500"}`}
+                        ${darkMode ? "bg-gray-900 text-white placeholder-white" : "bg-white text-black placeholder-gray-500"}`}
                     style={{ lineHeight: "1.25", whiteSpace: "pre", height: "100%", overflowY: "auto" }}
                 />
             </div>

@@ -27,7 +27,7 @@ export default function CppOutput({ cppCode, handleCopy, handleDownload, darkMod
 
     return (
         <div className="flex flex-col gap-4">
-            <div className={`w-full h-24 border-2 rounded px-4 flex flex-col gap-2 justify-center ${darkMode ? "border-white border-dashed" : "border-black border-dashed"}`}>
+            <div className={`w-full h-24 border-2 rounded px-4 flex flex-col gap-2 justify-center ${darkMode ? "border-white border-dashed" : "border-black border-dashed bg-white"}`}>
                 <p className={`${darkMode ? "text-white" : "text-black"}`}>
                     You can also view the <b>Abstract Syntax Tree (AST)</b> and <b>Intermediate Representation (IR)</b> of the input python code below.
                 </p>
@@ -52,7 +52,7 @@ export default function CppOutput({ cppCode, handleCopy, handleDownload, darkMod
                     autoCorrect="off"
                     autoComplete="off"
                     className={`w-full px-2 py-2 text-sm font-mono resize-none outline-none
-                        ${darkMode ? "bg-gray-900 text-white placeholder-white" : "bg-[#EEEEFF] text-black placeholder-gray-500"}`}
+                        ${darkMode ? "bg-gray-900 text-white placeholder-white" : "bg-white text-black placeholder-gray-500"}`}
                     style={{ lineHeight: "1.25", whiteSpace: "pre", height: "100%", overflowY: "auto" }}
                 />
 
