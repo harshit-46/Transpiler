@@ -25,9 +25,9 @@ export default function HomePage({ darkMode }) {
                 body: JSON.stringify({ code: pythonCode }),
             });
             const data = await response.json();
-            console.log(data.cppCode);
-            console.log(data.ir);
-            console.log(data.ast);
+            console.log("Cpp Code is : ",data.cppCode);
+            console.log("IR File is : ",data.ir);
+            console.log("AST File is : ",data.ast);
             setCppCode(data.cppCode);
             setIR(data.ir);
             setAST(data.ast);

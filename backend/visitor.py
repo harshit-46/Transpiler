@@ -15,6 +15,9 @@ class TranspilerVisitor(ast.NodeVisitor):
                 return "string"
             elif isinstance(node.value, bool):
                 return "bool"
+            else:
+                return "auto"
+    
         elif isinstance(node, ast.BinOp):
             left_type = self._infer_type(node.left)
             right_type = self._infer_type(node.right)
@@ -22,19 +25,41 @@ class TranspilerVisitor(ast.NodeVisitor):
                 return "double"
             elif "int" in (left_type, right_type):
                 return "int"
+            else:
+                return "auto"
+    
         elif isinstance(node, ast.Call):
-            if isinstance(node.func, ast.Name) and node.func.id == "str":
+            func_name = None
+            if isinstance(node.func, ast.Name):
+                func_name = node.func.id
+            elif isinstance(node.func, ast.Attribute):
+                func_name = node.func.attr
+            if func_name in ("str", "to_string"):
                 return "string"
-            elif node.func.id in ["to_string"]:
-                return "string"
+            elif func_name in ("int",):
+                return "int"
+            elif func_name in ("float",):
+                return "double"
+            elif func_name in ("bool",):
+                return "bool"
+            else:
+                return "auto"
+    
         elif isinstance(node, ast.Compare) or isinstance(node, ast.BoolOp):
             return "bool"
+    
         elif isinstance(node, ast.IfExp):
             then_type = self._infer_type(node.body)
             else_type = self._infer_type(node.orelse)
             return then_type if then_type == else_type else "auto"
-
+    
+        elif isinstance(node, ast.Name):
+        # Future enhancement: Look up from declared_vars or symbol table
+            return "auto"
+    
         return "auto"
+
+
 
     def visit_Assign(self, node):
         value = self._get_value(node.value)
