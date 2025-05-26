@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Contact() {
+export default function Contact({ darkMode }) {
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -53,7 +53,7 @@ export default function Contact() {
                 Let's Work Together
             </h1>
 
-            <div className="bg-[#EEEEFE] p-10 rounded-2xl shadow-lg w-full max-w-lg border border-gray-400">
+            <div className={`p-10 rounded-2xl shadow-lg w-full max-w-lg ${darkMode ? "bg-gray-800" : "bg-[EEEEFE]"} border border-gray-400`}>
                 <h2 className="text-white text-3xl font-bold text-center mb-8">
                     Get in Touch
                 </h2>
