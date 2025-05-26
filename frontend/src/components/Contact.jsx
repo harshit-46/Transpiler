@@ -53,14 +53,14 @@ export default function Contact({ darkMode }) {
                 Let's Work Together
             </h1>
 
-            <div className={`p-10 rounded-2xl shadow-lg w-full max-w-lg ${darkMode ? "bg-gray-800" : "bg-[EEEEFE]"} border border-gray-400`}>
-                <h2 className="text-white text-3xl font-bold text-center mb-8">
+            <div className={`p-10 rounded-2xl shadow-lg w-full max-w-lg ${darkMode ? "bg-gray-800" : "bg-[EEEEFE]"} border-2 border-black`}>
+                <h2 className={`text-3xl font-bold text-center mb-8 ${darkMode ? "text-white" : "text-black"}`}>
                     Get in Touch
                 </h2>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label htmlFor="name" className="block text-white text-lg mb-1">
+                        <label htmlFor="name" className={`block text-lg mb-1 ${darkMode ? "text-white" : "text-black"}`}>
                             Name
                         </label>
                         <input
@@ -75,7 +75,7 @@ export default function Contact({ darkMode }) {
                     </div>
 
                     <div>
-                        <label htmlFor="email" className="block text-white text-lg mb-1">
+                        <label htmlFor="email" className={`block text-lg mb-1 ${darkMode ? "text-white" : "text-black"}`}>
                             Email
                         </label>
                         <input
@@ -90,7 +90,7 @@ export default function Contact({ darkMode }) {
                     </div>
 
                     <div>
-                        <label htmlFor="message" className="block text-white text-lg mb-1">
+                        <label htmlFor="message" className={`block text-lg mb-1 ${darkMode ? "text-white" : "text-black"}`}>
                             Message
                         </label>
                         <textarea
