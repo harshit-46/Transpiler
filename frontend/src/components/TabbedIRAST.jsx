@@ -15,7 +15,7 @@ function TabbedIRAST({ ir, ast, darkMode }) {
         }`;
 
     return (
-        <div className={`max-w-7xl mx-auto mt-6 shadow-lg rounded-lg overflow-hidden ${darkMode ? "bg-gray-900 text-white border border-white" : "bg-white text-black border border-black"}`}>
+        <div className={`max-w-6xl md:max-w-7xl mx-auto mt-6 shadow-lg rounded-lg overflow-hidden ${darkMode ? "bg-gray-900 text-white border border-white" : "bg-white text-black border border-black"}`}>
             <div className="flex border-b border-gray-300">
                 <button className={tabStyle("ir")} onClick={() => setActiveTab("ir")}>
                     IR

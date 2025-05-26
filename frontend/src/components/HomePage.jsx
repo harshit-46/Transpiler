@@ -26,9 +26,6 @@ export default function HomePage({ darkMode }) {
                 body: JSON.stringify({ code: pythonCode }),
             });
             const data = await response.json();
-            console.log("Cpp Code is : ",data.cppCode);
-            console.log("IR File is : ",data.ir);
-            console.log("AST File is : ",data.ast);
             setCppCode(data.cppCode);
             setIR(data.ir);
             setAST(data.ast);
@@ -98,10 +95,10 @@ export default function HomePage({ darkMode }) {
 
             </div>
             <ActionButtons handleReset={handleReset} handleConvert={handleConvert} loading={loading} />
-            <div className="pb-8">
+            <div className="pb-16 space-y-12">
                 <TabbedIRAST ir={ir} ast={ast} darkMode={darkMode} />
+                <TableSection/>
             </div>
-            <TableSection/>
         </>
     );
 }

@@ -30,7 +30,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
                         onClick={() => setDarkMode(!darkMode)}
                         aria-label="Toggle Dark Mode"
                         title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                        className="pt-1"
+                        className="pt-1 cursor-pointer"
                     >
                         <span className="material-symbols-outlined text-xl">
                             {darkMode ? "light_mode" : "dark_mode"}
