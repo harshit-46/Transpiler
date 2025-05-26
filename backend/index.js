@@ -18,10 +18,8 @@ app.get('/', (req, res) => {
 app.post("/convert", (req, res) => {
     const { code } = req.body;
 
-    // Save the Python code to input.py
     fs.writeFileSync(path.join(__dirname, "input.py"), code);
 
-    // Execute the Python transpiler
     exec("python3 main.py", { cwd: __dirname }, (error, stdout, stderr) => {
         if (error) {
             console.error("Execution error:", error);
@@ -32,11 +30,6 @@ app.post("/convert", (req, res) => {
             const cppCode = fs.readFileSync(path.join(__dirname, "output.cpp"), "utf-8");
             const ir = fs.readFileSync(path.join(__dirname, "ir.txt"), "utf-8");
             const ast = fs.readFileSync(path.join(__dirname, "ast.txt"), "utf-8");
-
-            console.log("CPP Code:", cppCode);
-    console.log("IR:", ir);
-    console.log("AST:", ast);
-
             res.json({ cppCode, ir, ast });
         } catch (readError) {
             console.error("File read error:", readError);

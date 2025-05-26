@@ -3,7 +3,7 @@ export default function ActionButtons({ handleReset, handleConvert, loading }) {
         <div className="mt-6 flex justify-center gap-6 pb-20">
             <button
                 onClick={handleReset}
-                className="bg-blue-600 text-black border border-black px-6 py-2 rounded hover:bg-blue-400 cursor-pointer"
+                className="bg-blue-500 text-black border border-black px-6 py-2 rounded hover:bg-blue-600 cursor-pointer"
             >
                 Reset
             </button>

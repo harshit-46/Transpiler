@@ -28,17 +28,9 @@ export default function CppOutput({ cppCode, handleCopy, handleDownload, darkMod
     return (
         <div className="flex flex-col gap-4">
             <div className={`w-full h-24 border-2 rounded px-4 flex flex-col gap-2 justify-center ${darkMode ? "border-white border-dashed" : "border-black border-dashed"}`}>
-                <p className={`text-sm ${darkMode ? "text-white" : "text-black"}`}>
-                    You can also view the <b>Abstract Syntax Tree (AST)</b> and <b>Intermediate Representation (IR)</b> of the input Python code.
+                <p className={`${darkMode ? "text-white" : "text-black"}`}>
+                    You can also view the <b>Abstract Syntax Tree (AST)</b> and <b>Intermediate Representation (IR)</b> of the input python code below.
                 </p>
-                <div className="flex gap-4">
-                    <button className={`rounded px-4 py-1 text-sm transition cursor-pointer ${darkMode ? "border border-white" : "border border-black"}`}>
-                        AST
-                    </button>
-                    <button className={`rounded px-4 py-1 text-sm transition cursor-pointer ${darkMode ? "border border-white" : "border border-black"}`}>
-                        IR
-                    </button>
-                </div>
             </div>
 
             <div className={`relative flex w-full rounded-lg ${darkMode ? "border-2 border-white" : "border-2 border-black"}`} style={{ height: "20rem", overflow: "hidden" }}>

@@ -4,18 +4,18 @@ function TabbedIRAST({ ir, ast, darkMode }) {
     const [activeTab, setActiveTab] = useState("ir");
 
     const tabStyle = (tab) =>
-        `px-4 py-2 font-semibold rounded-t-lg transition ${
+        `px-4 py-2 font-semibold rounded-t-lg transition cursor-pointer ${
             activeTab === tab
                 ? darkMode
-                    ? "bg-gray-700 text-white"
+                    ? "bg-white text-black"
                     : "bg-white text-blue-600"
                 : darkMode
                     ? "bg-gray-800 text-gray-400"
-                    : "bg-[#EEEEFE] text-gray-600"
+                    : "text-gray-600"
         }`;
 
     return (
-        <div className={`max-w-7xl mx-auto mt-6 shadow-lg rounded-lg overflow-hidden ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
+        <div className={`max-w-7xl mx-auto mt-6 shadow-lg rounded-lg overflow-hidden ${darkMode ? "bg-gray-900 text-white border border-white" : "bg-white text-black border border-black"}`}>
             <div className="flex border-b border-gray-300">
                 <button className={tabStyle("ir")} onClick={() => setActiveTab("ir")}>
                     IR
