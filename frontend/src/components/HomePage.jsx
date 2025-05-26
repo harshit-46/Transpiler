@@ -3,6 +3,7 @@ import Header from "./Header";
 import PythonInput from "./PythonInput";
 import CppOutput from "./CppOutput";
 import ActionButtons from "./ActionButtons";
+import TabbedIRAST from "./TabbedIRAST";
 
 export default function HomePage({ darkMode }) {
     const [pythonCode, setPythonCode] = useState("");
@@ -24,7 +25,13 @@ export default function HomePage({ darkMode }) {
                 body: JSON.stringify({ code: pythonCode }),
             });
             const data = await response.json();
+            console.log(data.cppCode);
+            console.log(data.ir);
+            console.log(data.ast);
             setCppCode(data.cppCode);
+            setIR(data.ir);
+            setAST(data.ast);
+
         } catch (error) {
             alert("Conversion failed. Try again.");
         } finally {
@@ -89,7 +96,10 @@ export default function HomePage({ darkMode }) {
                 </div>
 
             </div>
-            <ActionButtons handleReset={handleReset} handleConvert={handleConvert} />
+            <ActionButtons handleReset={handleReset} handleConvert={handleConvert} loading={loading} />
+            <div className="pb-8">
+                <TabbedIRAST ir={ir} ast={ast} darkMode={darkMode} />
+            </div>
         </>
     );
 }

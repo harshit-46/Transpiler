@@ -1,30 +1,59 @@
 Module(
     body=[
         FunctionDef(
-            name='is_odd_or_even',
+            name='is_palindrome',
             args=arguments(
                 posonlyargs=[],
                 args=[
-                    arg(arg='number')],
+                    arg(arg='s')],
                 kwonlyargs=[],
                 kw_defaults=[],
                 defaults=[]),
             body=[
-                If(
-                    test=Compare(
-                        left=BinOp(
-                            left=Name(id='number', ctx=Load()),
-                            op=Mod(),
-                            right=Constant(value=2)),
+                Assign(
+                    targets=[
+                        Name(id='s', ctx=Store())],
+                    value=Call(
+                        func=Attribute(
+                            value=Call(
+                                func=Attribute(
+                                    value=Name(id='s', ctx=Load()),
+                                    attr='replace',
+                                    ctx=Load()),
+                                args=[
+                                    Constant(value=' '),
+                                    Constant(value='')],
+                                keywords=[]),
+                            attr='lower',
+                            ctx=Load()),
+                        args=[],
+                        keywords=[])),
+                Return(
+                    value=Compare(
+                        left=Name(id='s', ctx=Load()),
                         ops=[
                             Eq()],
                         comparators=[
-                            Constant(value=0)]),
-                    body=[
-                        Return(
-                            value=Constant(value='Even'))],
-                    orelse=[
-                        Return(
-                            value=Constant(value='Odd'))])],
-            decorator_list=[])],
+                            Subscript(
+                                value=Name(id='s', ctx=Load()),
+                                slice=Slice(
+                                    step=UnaryOp(
+                                        op=USub(),
+                                        operand=Constant(value=1))),
+                                ctx=Load())]))],
+            decorator_list=[]),
+        Assign(
+            targets=[
+                Name(id='input_string', ctx=Store())],
+            value=Constant(value='A man a plan a canal Panama')),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Call(
+                        func=Name(id='is_palindrome', ctx=Load()),
+                        args=[
+                            Name(id='input_string', ctx=Load())],
+                        keywords=[])],
+                keywords=[]))],
     type_ignores=[])

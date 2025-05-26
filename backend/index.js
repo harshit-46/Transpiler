@@ -18,25 +18,32 @@ app.get('/', (req, res) => {
 app.post("/convert", (req, res) => {
     const { code } = req.body;
 
-    // Save Python code to input.py
+    // Save the Python code to input.py
     fs.writeFileSync(path.join(__dirname, "input.py"), code);
 
-    // Run the Python transpiler (adjust main.py if needed)
+    // Execute the Python transpiler
     exec("python3 main.py", { cwd: __dirname }, (error, stdout, stderr) => {
         if (error) {
             console.error("Execution error:", error);
-            return res.status(500).json({ cppCode: "", error: stderr });
+            return res.status(500).json({ cppCode: "", ir: "", ast: "", error: stderr });
         }
 
-        // Read output.cpp
         try {
-            const outputPath = path.join(__dirname, "output.cpp");
-            const cppCode = fs.readFileSync(outputPath, "utf-8");
-            res.json({ cppCode });
+            const cppCode = fs.readFileSync(path.join(__dirname, "output.cpp"), "utf-8");
+            const ir = fs.readFileSync(path.join(__dirname, "ir.txt"), "utf-8");
+            const ast = fs.readFileSync(path.join(__dirname, "ast.txt"), "utf-8");
+
+            console.log("CPP Code:", cppCode);
+    console.log("IR:", ir);
+    console.log("AST:", ast);
+
+            res.json({ cppCode, ir, ast });
         } catch (readError) {
-            res.status(500).json({ cppCode: "", error: "Could not read output.cpp" });
+            console.error("File read error:", readError);
+            res.status(500).json({ cppCode: "", ir: "", ast: "", error: "Could not read one or more output files" });
         }
     });
 });
+
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
