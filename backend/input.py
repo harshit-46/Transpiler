@@ -1,9 +1,9 @@
-def is_palindrome(s):
-    # Remove spaces and convert to lowercase
-    s = s.replace(' ', '').lower()
-    # Check if the string is equal to its reverse
-    return s == s[::-1]
+# Function to check if a number is odd or even
 
-# Example usage
-input_string = 'A man a plan a canal Panama'
-print(is_palindrome(input_string))
+def is_odd_or_even(number):
+    # Check if the number is even
+    if number % 2 == 0:
+        return 'Even'
+    # If the number is not even, it is odd
+    else:
+        return 'Odd'

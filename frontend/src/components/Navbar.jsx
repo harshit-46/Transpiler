@@ -24,7 +24,6 @@ export default function Navbar({ darkMode, setDarkMode }) {
 
                 <div className="hidden md:flex items-center gap-6">
                     <Link to="/" className={linkStyle}>HOME</Link>
-                    <Link to="/about" className={linkStyle}>ABOUT</Link>
                     <Link to="/contact" className={linkStyle}>CONTACT</Link>
                     <button
                         onClick={() => setDarkMode(!darkMode)}

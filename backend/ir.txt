@@ -1,41 +1,28 @@
 Statement 1:
 {
     "type": "function_def",
-    "name": "is_palindrome",
+    "name": "is_odd_or_even",
     "args": [
-        "s"
+        "number"
     ],
     "body": [
         {
-            "type": "assign",
-            "target": "s",
-            "value": "s.replace( , ).lower()",
-            "datatype": "int"
-        },
-        {
-            "type": "return",
-            "value": "(s == s[unknown])"
+            "type": "if",
+            "condition": "((number % 2) == 0)",
+            "body": [
+                {
+                    "type": "return",
+                    "value": "Even"
+                }
+            ],
+            "elif": [],
+            "else": [
+                {
+                    "type": "return",
+                    "value": "Odd"
+                }
+            ]
         }
-    ]
-}
-
-========================================
-
-Statement 2:
-{
-    "type": "assign",
-    "target": "input_string",
-    "value": "A man a plan a canal Panama",
-    "datatype": "string"
-}
-
-========================================
-
-Statement 3:
-{
-    "type": "print",
-    "args": [
-        "is_palindrome(input_string)"
     ]
 }
 

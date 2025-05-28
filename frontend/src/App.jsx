@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
-import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
@@ -14,7 +13,6 @@ function App() {
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
       <Routes>
         <Route path="/" element={<HomePage darkMode={darkMode} />} />
-        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer/>
