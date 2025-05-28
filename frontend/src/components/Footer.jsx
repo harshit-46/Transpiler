@@ -23,16 +23,10 @@ export default function Footer() {
                 </button>
 
                 <div className="flex justify-center gap-6 mt-10 text-2xl">
-                    <a href="#" className="hover:text-blue-500 transition">
-                        <FaTwitter />
-                    </a>
-                    <a href="#" className="hover:text-pink-500 transition">
-                        <FaInstagram />
-                    </a>
-                    <a href="#" className="hover:text-green-400 transition">
+                    <a href="https://github.com/harshit-46" className="hover:text-green-400 transition" target="_blank">
                         <FaGithub />
                     </a>
-                    <a href="#" className="hover:text-blue-700 transition">
+                    <a href="https://www.linkedin.com/in/harshithere/" className="hover:text-blue-600 transition" target="_blank">
                         <FaLinkedin />
                     </a>
                 </div>
